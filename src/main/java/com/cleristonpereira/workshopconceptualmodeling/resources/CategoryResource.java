@@ -3,23 +3,27 @@ package com.cleristonpereira.workshopconceptualmodeling.resources;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cleristonpereira.workshopconceptualmodeling.domain.Category;
+import com.cleristonpereira.workshopconceptualmodeling.services.CategoryService;
 
 @RestController
 @RequestMapping(value = "/categories")
 public class CategoryResource {
 	
-	@GetMapping
-	public List<Category> listar() {
-		
-		Category cat1 = new Category(1L, "Informática");
-		Category cat2 = new Category(2L, "Escritório");
-		
-		return Arrays.asList(cat1, cat2);
+	@Autowired
+	private CategoryService service;
+	
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<Category> findById(@PathVariable Long id) {
+		Category obj = service.findById(id);
+		return ResponseEntity.ok().body(obj);
 	}
 
 }
