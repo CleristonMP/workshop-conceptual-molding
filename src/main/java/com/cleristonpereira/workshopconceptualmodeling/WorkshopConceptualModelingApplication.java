@@ -8,9 +8,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.cleristonpereira.workshopconceptualmodeling.domain.Category;
+import com.cleristonpereira.workshopconceptualmodeling.domain.City;
 import com.cleristonpereira.workshopconceptualmodeling.domain.Product;
+import com.cleristonpereira.workshopconceptualmodeling.domain.State;
 import com.cleristonpereira.workshopconceptualmodeling.repositories.CategoryRepository;
+import com.cleristonpereira.workshopconceptualmodeling.repositories.CityRepository;
 import com.cleristonpereira.workshopconceptualmodeling.repositories.ProductRepository;
+import com.cleristonpereira.workshopconceptualmodeling.repositories.StateRepository;
 
 @SpringBootApplication
 public class WorkshopConceptualModelingApplication implements CommandLineRunner {
@@ -20,6 +24,12 @@ public class WorkshopConceptualModelingApplication implements CommandLineRunner 
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private CityRepository cityRepository;
+	
+	@Autowired
+	private StateRepository stateRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(WorkshopConceptualModelingApplication.class, args);
@@ -45,6 +55,17 @@ public class WorkshopConceptualModelingApplication implements CommandLineRunner 
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2));
 		productRepository.saveAll(Arrays.asList(p1, p2, p3));
 		
+		State st1 = new State(null, "Minas Gerais");
+		State st2 = new State(null, "São Paulo");
+		
+		City c1 = new City(null, "Uberlândia", st1);
+		City c2 = new City(null, "São Paulo", st2);
+		City c3 = new City(null, "Campinas", st2);
+		
+		st1.getCities().addAll(Arrays.asList(c1));
+		st2.getCities().addAll(Arrays.asList(c2, c3));
+		
+		stateRepository.saveAll(Arrays.asList(st1, st2));
+		cityRepository.saveAll(Arrays.asList(c1, c2, c3));		
 	}
-
 }
