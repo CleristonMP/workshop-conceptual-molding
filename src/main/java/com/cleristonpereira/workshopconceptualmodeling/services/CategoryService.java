@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.cleristonpereira.workshopconceptualmodeling.domain.Category;
 import com.cleristonpereira.workshopconceptualmodeling.repositories.CategoryRepository;
+import com.cleristonpereira.workshopconceptualmodeling.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoryService {
@@ -19,7 +20,7 @@ public class CategoryService {
 	@Transactional
 	public Category findById(Long id) {
 		Optional<Category> obj = repository.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " 
+		+ id + ", Tipo: " + Category.class.getName()));
 	}
-
 }
