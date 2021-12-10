@@ -40,6 +40,9 @@ public class Customer implements Serializable {
 	@CollectionTable(name="PHONES")
 	private Set<String> phones = new HashSet<>();
 	
+	@OneToMany(mappedBy = "customer")
+	private List<Order> ordereds = new ArrayList<>();
+	
 	public Customer() {
 	}
 
@@ -99,6 +102,10 @@ public class Customer implements Serializable {
 		return phones;
 	}
 
+	public List<Order> getOrdereds() {
+		return ordereds;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

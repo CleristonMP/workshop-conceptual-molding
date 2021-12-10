@@ -1,5 +1,6 @@
 package com.cleristonpereira.workshopconceptualmodeling;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,16 +9,23 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.cleristonpereira.workshopconceptualmodeling.domain.Address;
+import com.cleristonpereira.workshopconceptualmodeling.domain.CardPayment;
 import com.cleristonpereira.workshopconceptualmodeling.domain.Category;
 import com.cleristonpereira.workshopconceptualmodeling.domain.City;
 import com.cleristonpereira.workshopconceptualmodeling.domain.Customer;
+import com.cleristonpereira.workshopconceptualmodeling.domain.Order;
+import com.cleristonpereira.workshopconceptualmodeling.domain.Payment;
+import com.cleristonpereira.workshopconceptualmodeling.domain.PaymentWithSlip;
 import com.cleristonpereira.workshopconceptualmodeling.domain.Product;
 import com.cleristonpereira.workshopconceptualmodeling.domain.State;
 import com.cleristonpereira.workshopconceptualmodeling.domain.enums.CustomerType;
+import com.cleristonpereira.workshopconceptualmodeling.domain.enums.PaymentStatus;
 import com.cleristonpereira.workshopconceptualmodeling.repositories.AddressRepository;
 import com.cleristonpereira.workshopconceptualmodeling.repositories.CategoryRepository;
 import com.cleristonpereira.workshopconceptualmodeling.repositories.CityRepository;
 import com.cleristonpereira.workshopconceptualmodeling.repositories.CustomerRepository;
+import com.cleristonpereira.workshopconceptualmodeling.repositories.OrderRepository;
+import com.cleristonpereira.workshopconceptualmodeling.repositories.PaymentRepository;
 import com.cleristonpereira.workshopconceptualmodeling.repositories.ProductRepository;
 import com.cleristonpereira.workshopconceptualmodeling.repositories.StateRepository;
 
@@ -41,6 +49,12 @@ public class WorkshopConceptualModelingApplication implements CommandLineRunner 
 	
 	@Autowired
 	private AddressRepository addressRepository;
+	
+	@Autowired
+	private OrderRepository orderRepository;
+	
+	@Autowired
+	private PaymentRepository paymentRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(WorkshopConceptualModelingApplication.class, args);
@@ -89,5 +103,33 @@ public class WorkshopConceptualModelingApplication implements CommandLineRunner 
 		
 		customerRepository.saveAll(Arrays.asList(cli1));
 		addressRepository.saveAll(Arrays.asList(e1, e2));
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+		
+		Order ped1 = new Order(null, sdf.parse("30/09/2017 10:32"), cli1, e1);
+		Order ped2 = new Order(null, sdf.parse("10/10/2017 19:35"), cli1, e2);
+		
+		Payment pagto1 = new CardPayment(null, PaymentStatus.SETTLED, ped1, 6);
+		ped1.setPayment(pagto1);
+		
+		Payment pagto2 = new PaymentWithSlip(null, PaymentStatus.PENDING, ped2, sdf.parse("20/10/2017 00:00"), null);
+		ped2.setPayment(pagto2);
+		
+		cli1.getOrdereds().addAll(Arrays.asList(ped1, ped2));
+		
+		orderRepository.saveAll(Arrays.asList(ped1, ped2));
+		paymentRepository.saveAll(Arrays.asList(pagto1, pagto2));
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
