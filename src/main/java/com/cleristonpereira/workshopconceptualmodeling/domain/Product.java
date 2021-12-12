@@ -2,8 +2,10 @@ package com.cleristonpereira.workshopconceptualmodeling.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -34,6 +37,9 @@ public class Product implements Serializable {
 			inverseJoinColumns = @JoinColumn(name = "category_id")
 	)
 	private List<Category> categories = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "id.product")
+	private Set<OrderItem> items = new HashSet<>();
 	
 	public Product() {
 	}
@@ -70,6 +76,18 @@ public class Product implements Serializable {
 
 	public List<Category> getCategories() {
 		return categories;
+	}
+
+	public Set<OrderItem> getItems() {
+		return items;
+	}
+	
+	public List<Order> getOrdereds() {
+		List<Order> list = new ArrayList<>();
+		for (OrderItem x : items) {
+			list.add(x.getOrder());
+		}
+		return list;
 	}
 
 	@Override

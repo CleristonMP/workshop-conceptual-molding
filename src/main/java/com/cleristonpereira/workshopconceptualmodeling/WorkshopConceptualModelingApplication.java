@@ -14,6 +14,7 @@ import com.cleristonpereira.workshopconceptualmodeling.domain.Category;
 import com.cleristonpereira.workshopconceptualmodeling.domain.City;
 import com.cleristonpereira.workshopconceptualmodeling.domain.Customer;
 import com.cleristonpereira.workshopconceptualmodeling.domain.Order;
+import com.cleristonpereira.workshopconceptualmodeling.domain.OrderItem;
 import com.cleristonpereira.workshopconceptualmodeling.domain.Payment;
 import com.cleristonpereira.workshopconceptualmodeling.domain.PaymentWithSlip;
 import com.cleristonpereira.workshopconceptualmodeling.domain.Product;
@@ -24,6 +25,7 @@ import com.cleristonpereira.workshopconceptualmodeling.repositories.AddressRepos
 import com.cleristonpereira.workshopconceptualmodeling.repositories.CategoryRepository;
 import com.cleristonpereira.workshopconceptualmodeling.repositories.CityRepository;
 import com.cleristonpereira.workshopconceptualmodeling.repositories.CustomerRepository;
+import com.cleristonpereira.workshopconceptualmodeling.repositories.OrderItemRepository;
 import com.cleristonpereira.workshopconceptualmodeling.repositories.OrderRepository;
 import com.cleristonpereira.workshopconceptualmodeling.repositories.PaymentRepository;
 import com.cleristonpereira.workshopconceptualmodeling.repositories.ProductRepository;
@@ -55,6 +57,9 @@ public class WorkshopConceptualModelingApplication implements CommandLineRunner 
 	
 	@Autowired
 	private PaymentRepository paymentRepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(WorkshopConceptualModelingApplication.class, args);
@@ -119,6 +124,19 @@ public class WorkshopConceptualModelingApplication implements CommandLineRunner 
 		
 		orderRepository.saveAll(Arrays.asList(ped1, ped2));
 		paymentRepository.saveAll(Arrays.asList(pagto1, pagto2));
+		
+		OrderItem ip1 = new OrderItem(ped1, p1, 0.00, 1, 2000.00);
+		OrderItem ip2 = new OrderItem(ped1, p3, 0.00, 2, 80.00);
+		OrderItem ip3 = new OrderItem(ped2, p2, 100.00, 1, 800.00);
+		
+		ped1.getItems().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItems().addAll(Arrays.asList(ip3));
+		
+		p1.getItems().addAll(Arrays.asList(ip1));
+		p2.getItems().addAll(Arrays.asList(ip3));
+		p3.getItems().addAll(Arrays.asList(ip2));
+		
+		orderItemRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
 	}
 }
 
