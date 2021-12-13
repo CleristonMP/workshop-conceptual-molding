@@ -17,7 +17,18 @@ INSERT INTO tb_city (name, state_id) VALUES ('Uberlândia', 1);
 INSERT INTO tb_city (name, state_id) VALUES ('São Paulo', 2);
 INSERT INTO tb_city (name, state_id) VALUES ('Campinas', 2);
 
-INSERT INTO tb_customer (name, email, cpf_or_cnpj, type) VALUES ('Maria Silva', 'maria@gmail.com', 36378912377, 1);
+INSERT INTO tb_customer (name, email, cpf_or_cnpj, type) VALUES ('Maria Silva', 'maria@gmail.com', '36378912377', 1);
+INSERT INTO tb_customer (name, email, cpf_or_cnpj, type) VALUES ('Cooper Hamilton','cooperhamilton@google.couk','68.144.684/9513-22',2);
+INSERT INTO tb_customer (name, email, cpf_or_cnpj, type) VALUES ('Jamal Lang','jamallang@aol.edu','33.785.916/2271-52',2);
+INSERT INTO tb_customer (name, email, cpf_or_cnpj, type) VALUES ('Rhiannon Jones','rhiannonjones@protonmail.ca','60.861.205/8139-11',2);
+INSERT INTO tb_customer (name, email, cpf_or_cnpj, type) VALUES ('Jonas Lawson','jonaslawson4774@yahoo.net','24.264.806/4437-16',2);
+INSERT INTO tb_customer (name, email, cpf_or_cnpj, type) VALUES ('Brock Rojas','brockrojas@protonmail.couk','453.919.248-93',1);
+INSERT INTO tb_customer (name, email, cpf_or_cnpj, type) VALUES ('Duncan Klein','duncanklein808@outlook.couk','280.141.365-62',1);
+INSERT INTO tb_customer (name, email, cpf_or_cnpj, type) VALUES ('Nolan Compton','nolancompton@hotmail.couk','767.885.241-19',1);
+INSERT INTO tb_customer (name, email, cpf_or_cnpj, type) VALUES ('Dale Vincent','dalevincent@yahoo.net','298.152.547-11',1);
+INSERT INTO tb_customer (name, email, cpf_or_cnpj, type) VALUES ('Shad Cote','shadcote5311@hotmail.net','23.948.575/5478-43',2);
+INSERT INTO tb_customer (name, email, cpf_or_cnpj, type) VALUES ('Kylee Joyner','kyleejoyner6211@protonmail.ca','63.825.445/4286-19',2);
+
 
 INSERT INTO tb_phones (customer_id, phones) VALUES (1, '27363323');
 INSERT INTO tb_phones (customer_id, phones) VALUES (1, '93838393');

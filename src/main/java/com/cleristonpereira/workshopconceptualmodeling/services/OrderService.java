@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.cleristonpereira.workshopconceptualmodeling.domain.Order;
 import com.cleristonpereira.workshopconceptualmodeling.repositories.OrderRepository;
-import com.cleristonpereira.workshopconceptualmodeling.services.exceptions.ObjectNotFoundException;
+import com.cleristonpereira.workshopconceptualmodeling.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class OrderService {
@@ -20,7 +20,7 @@ public class OrderService {
 	@Transactional
 	public Order findById(Long id) {
 		Optional<Order> obj = repository.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " 
+		return obj.orElseThrow(() -> new ResourceNotFoundException("Objeto não encontrado! Id: " 
 		+ id + ", Tipo: " + Order.class.getName()));
 	}
 }
