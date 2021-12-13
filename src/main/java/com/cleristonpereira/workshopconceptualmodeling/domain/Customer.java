@@ -36,7 +36,7 @@ public class Customer implements Serializable {
 	private List<Address> adresses = new ArrayList<>();
 	
 	@ElementCollection
-	@CollectionTable(name="PHONES")
+	@CollectionTable(name="tb_phones")
 	private Set<String> phones = new HashSet<>();
 	
 	@JsonIgnore

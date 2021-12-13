@@ -3,11 +3,13 @@ package com.cleristonpereira.workshopconceptualmodeling.domain;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import com.cleristonpereira.workshopconceptualmodeling.domain.enums.PaymentStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
+@Table(name = "tb_payment_with_slip")
 public class PaymentWithSlip extends Payment {
 	private static final long serialVersionUID = 1L;
 	

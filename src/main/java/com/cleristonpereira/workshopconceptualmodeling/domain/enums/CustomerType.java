@@ -41,9 +41,3 @@ public enum CustomerType {
 		throw new IllegalArgumentException("Id inválido: " + cod);
 	}
 }
-
-
-
-
-
-

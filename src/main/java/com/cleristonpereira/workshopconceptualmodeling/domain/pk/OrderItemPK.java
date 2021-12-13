@@ -9,7 +9,6 @@ import javax.persistence.ManyToOne;
 
 import com.cleristonpereira.workshopconceptualmodeling.domain.Order;
 import com.cleristonpereira.workshopconceptualmodeling.domain.Product;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Embeddable
 public class OrderItemPK implements Serializable {
